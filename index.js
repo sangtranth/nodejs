@@ -29,7 +29,7 @@ const server = http.createServer((req, res) => {
 
     //build file path
     let filePath = path.join(__dirname, 'public', req.url === '/' ? 'index.html' : req.url);
-
+    
     //extension of file
     let extname = path.extname(filePath);
 
@@ -58,7 +58,7 @@ const server = http.createServer((req, res) => {
     //read file
     fs.readFile(filePath, (err, content) => {
         if(err) {
-            if(err.code === 'EN0ENT') {
+            if(err.code == 'EN0ENT') {
                 //PAGE NOT FOUND
                 fs.readFile(path.join(__dirname, 'public', '404.html'), (err, content) => {
                     res.writeHead(200, {'Content-Type': 'text/html'});
@@ -77,6 +77,6 @@ const server = http.createServer((req, res) => {
     });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT||5000;
 
 server.listen(PORT, () => console.log(`server is running on port ${PORT}`));
